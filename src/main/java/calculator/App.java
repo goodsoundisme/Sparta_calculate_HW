@@ -1,53 +1,92 @@
 package calculator;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class App {
 
     public static void main(String[] args) {
+
+        // 연산 결과 저장을 위한 ArrayList 생성
+        List<Integer> results = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("첫번째 정수를 입력하세요.");//첫번째 숫자 입력하도록
-        int firstNumber = sc.nextInt(); //첫번째 정수 입력받기
-        System.out.println("두번째 정수를 입력하세요."); //두번째 숫자 입력하도록
-        int secondNumber = sc.nextInt(); //두번째 정수 입력받기
-        System.out.println("연산을 입력하세요."); //연산자 받기
-        char operator = sc.next().charAt(0);
+        while (true) { // 반복 루프 만들기
 
-        int result = 0; //결과값 0으로 초기화
-        boolean error = false; //입력한 값이 정확(=연산이 성공적으로 이루어진)경우에만 출력하도록 하기 위해 설정. 오류 메시지를 위해서는 true로 값을 바꿔주면 된다!
+            System.out.println("첫번째 정수를 입력하세요."); // 첫번째 숫자 입력 받기
+            int firstNumber = sc.nextInt();
+            System.out.println("두번째 정수를 입력하세요."); // 두번째 숫자 입력 받기
+            int secondNumber = sc.nextInt();
+            System.out.println("연산을 입력하세요."); // 연산자 입력 받기
+            char operator = sc.next().charAt(0);
 
-        switch (operator) { //switch로 입력받은 연산에 따라 다르게 수행
-            case '+': //operator가 +인 케이스
-                result = firstNumber + secondNumber; //연산자 사용
-                break; //break로 끝내주기
-            case '-':
-                result = firstNumber - secondNumber;
-                break;
-            case '*':
-                result = firstNumber * secondNumber;
-                break;
-            case '/':
-                if (secondNumber == 0) {
-                    System.out.println("분모에는 0이 입력 될 수 없어요. 나눗셈 연산은 분자/분모 순서입니다.");
-                    error = true; //에러 변수를 트루로 변경
+            int result = 0; // 결과값 초기화
+            boolean error = false; // 에러 발생 여부
+
+            switch (operator) { // 연산자에 따른 연산 수행
+                case '+':
+                    result = firstNumber + secondNumber;
+                    break;
+                case '-':
+                    result = firstNumber - secondNumber;
+                    break;
+                case '*':
+                    result = firstNumber * secondNumber;
+                    break;
+                case '/':
+                    if (secondNumber == 0) {
+                        System.out.println("분모에는 0이 입력될 수 없습니다. 나눗셈 연산은 분자/분모 순서입니다.");
+                        error = true;
+                    } else {
+                        result = firstNumber / secondNumber;
+                    }
+                    break;
+                default:
+                    System.out.println("올바르지 않은 연산 기호입니다.");
+                    error = true;
+                    break;
+            }
+
+            if (!error) {
+                // 결과를 ArrayList에 저장
+                results.add(result);
+                System.out.println("결과: " + result);
+            }
+
+            // 남아 있는 줄바꿈 문자 처리
+            sc.nextLine();
+
+            // 가장 먼저 저장된 연산 결과 삭제
+            System.out.println("가장 먼저 저장된 연산 결과를 삭제하겠습니까? remove를 입력하세요. 아니면 no.");
+            String command = sc.nextLine();
+            if (command.equalsIgnoreCase("remove")) {
+                if (!results.isEmpty()) {
+                    results.remove(0); // 가장 오래된 결과 삭제
+                    System.out.println("가장 먼저 저장된 결과가 삭제되었습니다.");
                 } else {
-                    result = firstNumber / secondNumber;
+                    System.out.println("삭제할 결과가 없습니다.");
                 }
-                break;
-            default:
-                System.out.println("올바르지 않은 연산 기호입니다.");
-                error = true;
-                break;
+            }
+
+            System.out.println("저장된 모든 연산 결과를 출력하려면 'inquiry'를 입력하세요.");
+            System.out.println("더 계산하시겠습니까? exit 입력 시 종료");
+
+            String exitInput = sc.nextLine(); // 남은 줄바꿈 문자 처리
+
+            if (exitInput.equalsIgnoreCase("inquiry")) {
+                // 저장된 모든 연산 결과를 출력
+                System.out.println("모든 저장된 연산 결과:");
+                for (int resultValue : results) { // 향상된 for문 사용
+                    System.out.println(resultValue);
+                }
+                continue; // 결과 출력 후 다시 루프 시작
+            }
+
+            // 반복 계속 여부 확인
+            if (exitInput.equalsIgnoreCase("exit")) {
+                break; // 프로그램 종료
+            }
         }
-        if (!error) {
-            System.out.println("결과 : "+result);
-
-
-
-
-        }
-
     }
-
 }
