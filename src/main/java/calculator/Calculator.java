@@ -47,11 +47,11 @@ public class Calculator {
 //        results.add(result);
 //    }
 
-    //연산 결과 반환하는 메서드 getter매서드
+    //연산 결과 반환하는 메서드 > getter매서드
     public List<Integer> getResults() {
         return results;
     }
-    //결과 수정하는 setter 메서드..
+    //결과 수정하는 setter 메서드..이게 맞나
     public void setResults(List<Integer> results) {
         this.results=results;
     }
