@@ -5,8 +5,10 @@ import java.util.InvalidPropertiesFormatException;
 import java.util.List;
 
 public class Calculator {
-    private List<Integer> results;
+    private List<Integer> results; //연산결과를 저장하는 컬렉션 private으로 설정해 외부에서 직접 접근하지 못하도록.
 
+
+    //생성자
     public Calculator() {
         results = new ArrayList<>();
     }
@@ -40,10 +42,30 @@ public class Calculator {
         return result;
     }
 
-    //연산 결과 반환하는 메서드
+//    //연산 결과를 추가하는 메서드
+//    private void addResult(int result) {
+//        results.add(result);
+//    }
+
+    //연산 결과 반환하는 메서드 getter매서드
     public List<Integer> getResults() {
         return results;
     }
+    //결과 수정하는 setter 메서드..
+    public void setResults(List<Integer> results) {
+        this.results=results;
+    }
+    //가장 오래된(먼저 나온) 연산결과를 삭제하는 메서드
+    public void removeFirstResult(){
+        if(!results.isEmpty()) {
+            results.remove(0); //가장 오래된 결과 삭제
+        }
+    }
+
+
+
+
+
 }
 
 

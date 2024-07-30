@@ -10,7 +10,8 @@ public class App {
     public static void main(String[] args) {
 
         // 연산 결과 저장을 위한 ArrayList 생성
-        List<Integer> results = new ArrayList<>();
+//        List<Integer> results = new ArrayList<>();
+
         Calculator calculator = new Calculator(); //Calculator 인스턴스 생성
         Scanner sc = new Scanner(System.in);
 
@@ -26,10 +27,10 @@ public class App {
             int result = 0; // 결과값 초기화
             boolean error = false; // 에러 발생 여부
 
-            try{
+            try {
                 //Calculator 클래스로 연산수행
-                result = calculator.calculate(firstNumber,secondNumber,operator);
-            } catch (ArithmeticException | InvalidPropertiesFormatException e){
+                result = calculator.calculate(firstNumber, secondNumber, operator);
+            } catch (ArithmeticException | InvalidPropertiesFormatException e) {
                 System.out.println(e.getMessage());
                 error = true;
             }
@@ -60,7 +61,7 @@ public class App {
 
             if (!error) { //결과가 에러가 아닐때 출력
                 // 결과를 ArrayList에 저장
-                results.add(result);
+//                results.add(result);
                 System.out.println("결과: " + result);
             }
 
@@ -71,13 +72,14 @@ public class App {
             System.out.println("가장 먼저 저장된 연산 결과를 삭제하겠습니까? remove를 입력하세요. 아니면 no.");
             String command = sc.nextLine();
             if (command.equalsIgnoreCase("remove")) {
-                if (!calculator.getResults().isEmpty()) {
-                    calculator.getResults().remove(0); // 가장 오래된 결과 삭제
-                    System.out.println("가장 먼저 저장된 결과가 삭제되었습니다.");
-                } else {
-                    System.out.println("삭제할 결과가 없습니다.");
-                }
+                calculator.removeFirstResult();//Calculator 클래스 메서드 호출 한 것
+//                if (!calculator.getResults().isEmpty()) {
+//                    calculator.getResults().remove(0); // 가장 오래된 결과 삭제
+                System.out.println("가장 먼저 저장된 결과가 삭제되었습니다.");
+            } else {
+                System.out.println("삭제할 결과가 없습니다.");
             }
+
 
             System.out.println("저장된 모든 연산 결과를 출력하려면 'inquiry'를 입력하세요.");
             System.out.println("더 계산하시겠습니까? exit 입력 시 종료");
@@ -87,10 +89,11 @@ public class App {
             if (exitInput.equalsIgnoreCase("inquiry")) {
                 // 저장된 모든 연산 결과를 출력
                 System.out.println("모든 저장된 연산 결과:");
-                for (int resultValue : calculator.getResults()) { // 향상된 for문 사용
+                List<Integer> results = calculator.getResults(); //Calculator 클래스의 매서드 호출
+                for (int resultValue : results) { // 향상된 for문 사용
                     System.out.println(resultValue);
                 }
-                continue; // 결과 출력 후 다시 루프 시작
+                continue; //결과 출력 후 다시 루프시작
             }
 
             // 반복 계속 여부 확인
@@ -100,3 +103,4 @@ public class App {
         }
     }
 }
+
