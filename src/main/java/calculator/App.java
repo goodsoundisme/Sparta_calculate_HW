@@ -89,7 +89,7 @@ public class App {
             if (exitInput.equalsIgnoreCase("inquiry")) {
                 // 저장된 모든 연산 결과를 출력
                 System.out.println("모든 저장된 연산 결과:");
-                List<Integer> results = calculator.getResults(); //Calculator 클래스의 매서드 호출
+                List<Integer> results = calculator.inquiryResults(); //Calculator 클래스의 매서드 호출
                 for (int resultValue : results) { // 향상된 for문 사용
                     System.out.println(resultValue);
                 }

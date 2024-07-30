@@ -47,9 +47,9 @@ public class Calculator {
 //        results.add(result);
 //    }
 
-    //연산 결과 반환하는 메서드 > getter매서드
-    public List<Integer> getResults() {
-        return results;
+    //연산 결과 반환하는 메서드 > getter매서드(level2-3) >였는데 inquiryResults 메서드로 변견 level2-5
+    public List<Integer> inquiryResults() {
+        return new ArrayList<>(results); //외부에서 직접 수정 불가 >컬렉션의 복사본을 반환하니까
     }
     //결과 수정하는 setter 메서드..이게 맞나
     public void setResults(List<Integer> results) {
