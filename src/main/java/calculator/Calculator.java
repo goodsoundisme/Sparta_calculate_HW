@@ -10,9 +10,9 @@ public class Calculator {
 
     //생성자
     public Calculator() {
-        results = new ArrayList<>();
+        results = new ArrayList<>(); //생성자를 통해 컬렉션 필드 초기화..
     }
-//양의 정수 두개와 연산기호를 매개변수로 받아서 연산하는 매소드
+//숫자 두개와 연산기호를 매개변수로 받아서 연산하는 매소드
 
     public int calculate(int num1, int num2, char operator) throws InvalidPropertiesFormatException {
         int result;
